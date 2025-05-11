@@ -1,8 +1,19 @@
 # TrulloDB API-dokumentation
 
 ## Översikt
+TrulloDB är ett RESTful API för att hantera användare och uppgifter med rollbaserad åtkomstkontroll.
 
-TrulloDB är ett RESTful API för att hantera användare, uppgifter och projekt med rollbaserad åtkomstkontroll.
+## Använda tekniker och verktyg
+Denna applikation är byggd med Node.js och Express för att skapa ett RESTful API. TypeScript används för typning och utvecklarstöd. Prisma används som ORM för att hantera databasen, som i detta fall är PostgreSQL.
+
+Jag valde att använda PostgreSQL istället för en NoSQL-databas eftersom en relationsdatabas passar bra för att hantera tydliga relationer mellan användare, uppgifter och projekt (som jag tänkte implementerade men aldrig hann). PostgreSQL gör det enklare att hantera dessa relationer genom tabeller och främmande nycklar, vilket ger en mer strukturerad och skalbar lösning för applikationens behov.
+
+Miljövariabler hanteras med dotenv.
+
+För autentisering används JSON Web Tokens (JWT) och bcrypt används för att säkert hasha lösenord. CORS används för att tillåta förfrågningar från andra domäner. Nodemon används i utvecklingsmiljön för att automatiskt starta om servern vid ändringar.
+
+De viktigaste npm-paketen är:
+express, dotenv, bcrypt, jsonwebtoken, @prisma/client, cors, typescript, ts-node, nodemon, samt prisma för databasverktyg.
 
 **Bas-URL:** `http://localhost:3000/trullodb`
 
