@@ -30,7 +30,7 @@ npm run dev
 Create a `.env` file in the root with:
 
 ```env
-DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
+DATABASE_URL=postgresql://trullodb_zyzr_user:KgDLM2c62nNffDWFoQfOKMxjnkiQ4DnD@dpg-d0firkidbo4c73agnj90-a.frankfurt-postgres.render.com/trullodb_zyzr
 JWT_SECRET=your_jwt_secret
 ```
 
