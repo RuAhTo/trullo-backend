@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id Int @id @default(autoincrement())
+  title String
+  description String?
+  status Status
+  author User @relation("AuthorOfTask", fields: [authorId], references: [id])
+  authorId Int
+  assignedTo User? @relation("AssignedToTask", fields: [assignedToId], references: [id])
+  assignedToId Int?
+  createdAt DateTime @default(now())
+  finishedBy DateTime?
+  project Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
+}
+model User {
+  id            Int             @id @default(autoincrement())
+  username      String          @unique
+  email         String          @unique
+  name          String
+  password      String
+  authoredTasks Task[]          @relation("AuthorOfTask")
+  assignedTasks Task[]          @relation("AssignedToTask")
+  projects      ProjectMember[]
+}
+
+model Project {
+  id        Int             @id @default(autoincrement())
+  title     String
+  tasks     Task[]
+  members   ProjectMember[]
+}
+
+model ProjectMember {
+  id        Int     @id @default(autoincrement())
+  role      ProjectRole
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+enum Status {
+TO_DO
+IN_PROGRESS
+BLOCKED
+DONE
+}
+
+enum ProjectRole {
+  USER
+  ADMIN
+}
