@@ -1,33 +1,32 @@
+# TrulloDB API-dokumentation
 
-# TrulloDB API Documentation
+## Översikt
 
-## Overview
+TrulloDB är ett RESTful API för att hantera användare, uppgifter och projekt med rollbaserad åtkomstkontroll.
 
-TrulloDB is a RESTful API for managing users, tasks, and projects with role-based access control.
-
-**Base URL:** `http://localhost:3000/trullodb`
+**Bas-URL:** `http://localhost:3000/trullodb`
 
 ---
 
-## Table of Contents
+## Innehållsförteckning
 
 1. [Installation](#installation)
-2. [Authentication](#authentication)
-3. [User Routes](#user-routes)
-4. [Task Routes](#task-routes)
+2. [Autentisering](#autentisering)
+3. [Användarrutter](#användarrutter)
+4. [Uppgiftsrutter](#uppgiftsrutter)
 
 ---
 
 ## Installation
 
-### Run in Development
+### Kör i utvecklingsläge
 ```bash
 npm run dev
 ```
 
-### Environment Variables
+### Miljövariabler
 
-Create a `.env` file in the root with:
+Skapa en `.env`-fil i projektets rotkatalog med följande innehåll:
 
 ```env
 DATABASE_URL=postgresql://trullodb_zyzr_user:KgDLM2c62nNffDWFoQfOKMxjnkiQ4DnD@dpg-d0firkidbo4c73agnj90-a.frankfurt-postgres.render.com/trullodb_zyzr
@@ -36,13 +35,13 @@ JWT_SECRET=your_jwt_secret
 
 ---
 
-## Authentication
+## Autentisering
 
 ### POST `/auth/login`
 
-Authenticate a user and receive a JWT.
+Autentisera en användare och få en JWT-token.
 
-- **Request Body:**
+- **Begäran:**
 
 ```json
 {
@@ -51,7 +50,7 @@ Authenticate a user and receive a JWT.
 }
 ```
 
-- **Response:**
+- **Svar:**
 
 ```json
 {
@@ -60,13 +59,13 @@ Authenticate a user and receive a JWT.
 }
 ```
 
-- **Errors:**
-  - `401 Unauthorized`: Invalid credentials
-  - `500 Internal Server Error`: Unexpected error
+- **Felmeddelanden:**
+  - `401 Unauthorized`: Ogiltiga inloggningsuppgifter
+  - `500 Internal Server Error`: Oväntat fel
 
-### Using the Token
+### Använda token
 
-Add this header to authorized requests:
+Lägg till följande header i skyddade förfrågningar:
 
 ```
 Authorization: Bearer <token>
@@ -74,28 +73,28 @@ Authorization: Bearer <token>
 
 ---
 
-## User Routes
+## Användarrutter
 
 ### GET `/users`
 
-- **Description:** Retrieve all users.
-- **Authentication:** Not required
+- **Beskrivning:** Hämta alla användare.
+- **Autentisering:** Ej nödvändig
 
 ---
 
 ### GET `/user/:id`
 
-- **Description:** Get a specific user by ID.
-- **Authentication:** Not required
-- **Params:**
-  - `id` — User ID
+- **Beskrivning:** Hämta en specifik användare med ID.
+- **Autentisering:** Ej nödvändig
+- **Parametrar:**
+  - `id` — Användar-ID
 
 ---
 
 ### POST `/users`
 
-- **Description:** Create a new user.
-- **Authentication:** Not required
+- **Beskrivning:** Skapa en ny användare.
+- **Autentisering:** Ej nödvändig
 - **Body:**
 
 ```json
@@ -107,12 +106,12 @@ Authorization: Bearer <token>
 }
 ```
 
-- **Response:**
+- **Svar:**
 
 ```json
 {
   "id": 1,
-  "message": "User created!",
+  "message": "Användare skapad!",
   "username": "johndoe"
 }
 ```
@@ -121,8 +120,8 @@ Authorization: Bearer <token>
 
 ### PUT `/users`
 
-- **Description:** Update authenticated user’s data.
-- **Authentication:** Required
+- **Beskrivning:** Uppdatera inloggad användares information.
+- **Autentisering:** Krävs
 
 - **Body:**
 
@@ -139,73 +138,73 @@ Authorization: Bearer <token>
 
 ### DELETE `/users`
 
-- **Description:** Delete authenticated user.
-- **Authentication:** Required
+- **Beskrivning:** Ta bort inloggad användare.
+- **Autentisering:** Krävs
 
-- **Response:**
+- **Svar:**
 
 ```json
 {
-  "message": "User deleted!",
+  "message": "Användare borttagen!",
   "user": { ... }
 }
 ```
 
 ---
 
-## Task Routes
+## Uppgiftsrutter
 
 ### GET `/tasks`
 
-- **Description:** Get all tasks.
-- **Authentication:** Not required
+- **Beskrivning:** Hämta alla uppgifter.
+- **Autentisering:** Ej nödvändig
 
 ---
 
 ### GET `/tasks/:id`
 
-- **Description:** Get task by ID.
-- **Authentication:** Not required
+- **Beskrivning:** Hämta en uppgift med ID.
+- **Autentisering:** Ej nödvändig
 
 ---
 
 ### GET `/users/tasks`
 
-- **Description:** Get tasks created by the authenticated user.
-- **Authentication:** Required
+- **Beskrivning:** Hämta uppgifter skapade av inloggad användare.
+- **Autentisering:** Krävs
 
 ---
 
 ### GET `/project/:id/tasks`
 
-- **Description:** Get tasks by project ID.
-- **Authentication:** Required
+- **Beskrivning:** Hämta uppgifter kopplade till ett projekt-ID.
+- **Autentisering:** Krävs
 
 ---
 
 ### POST `/tasks`
 
-- **Description:** Create a new task.
-- **Authentication:** Recommended
+- **Beskrivning:** Skapa en ny uppgift.
+- **Autentisering:** Rekommenderas
 
 - **Body:**
 
 ```json
 {
-  "title": "Task Title",
-  "description": "Details about task",
+  "title": "Uppgiftstitel",
+  "description": "Detaljer om uppgiften",
   "status": "TO_DO",
   "authorId": 1
 }
 ```
 
-- **Response:**
+- **Svar:**
 
 ```json
 {
   "id": 2,
-  "message": "Todo created!",
-  "title": "Task Title",
+  "message": "Uppgift skapad!",
+  "title": "Uppgiftstitel",
   "status": "TO_DO",
   "authorId": 1
 }
@@ -213,10 +212,10 @@ Authorization: Bearer <token>
 
 ---
 
-## Notes
+## Noteringar
 
-- Status options: `TO_DO`, `IN_PROGRESS`, `BLOCKED`, `DONE`
-- Project roles: `USER`, `ADMIN`
-- Protected routes require a valid JWT token
+- Tillgängliga statusalternativ: `TO_DO`, `IN_PROGRESS`, `BLOCKED`, `DONE`
+- Projektroller: `USER`, `ADMIN`
+- Skyddade rutter kräver en giltig JWT-token
 
 ---
