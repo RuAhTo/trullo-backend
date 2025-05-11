@@ -40,7 +40,7 @@ npm run dev
 Skapa en `.env`-fil i projektets rotkatalog med följande innehåll:
 
 ```env
-DATABASE_URL=postgresql://trullodb_zyzr_user:KgDLM2c62nNffDWFoQfOKMxjnkiQ4DnD@dpg-d0firkidbo4c73agnj90-a.frankfurt-postgres.render.com/trullodb_zyzr
+DATABASE_URL=postrgres_URL
 JWT_SECRET=your_jwt_secret
 ```
 
